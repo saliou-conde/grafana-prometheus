@@ -1,6 +1,6 @@
 global:
-  scrape_interval: 5s      # How often Prometheus scrapes metrics
-  evaluation_interval: 5s  # How often rules are evaluated
+  scrape_interval: 15s      # How often Prometheus scrapes metrics
+  evaluation_interval: 15s  # How often rules are evaluated
 
   # Optional: default labels applied to all metrics
   external_labels:
