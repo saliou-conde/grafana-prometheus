@@ -1,0 +1,33 @@
+global:
+  scrape_interval: 5s      # How often Prometheus scrapes metrics
+  evaluation_interval: 5s  # How often rules are evaluated
+
+  # Optional: default labels applied to all metrics
+  external_labels:
+    monitor: 'local-monitor'
+
+# 🔍 List of scrape jobs
+scrape_configs:
+  # 🧠 Prometheus monitors itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090','localhost:9900','localhost:9100','localhost:9113']
+
+  # ☕ Monitor your Spring Boot application
+  - job_name: 'spring-boot-app'
+    metrics_path: '/actuator/prometheus'  # Spring Boot actuator metrics endpoint
+    static_configs:
+      - targets: ['localhost:9900']  # Docker service name and port of your app
+        labels:
+          application: "grafana-prometheus"
+
+  # 🔧 Example for another microservice
+  # - job_name: 'order-service'
+  #   metrics_path: '/actuator/prometheus'
+  #   static_configs:
+  #     - targets: ['order-service:8081']
+
+  # 🖥️ Optional: Node Exporter for system-level metrics
+  # - job_name: 'node-exporter'
+  #   static_configs:
+  #     - targets: ['node-exporter:9100']

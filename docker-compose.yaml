@@ -1,0 +1,43 @@
+# Docker Compose file for Grafana + Prometheus + Spring Boot app (OPTIONAL)
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./data/prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+    networks:
+      - microservices-net
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "admin"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - microservices-net
+
+#  app:
+#    image: my-spring-boot-app:latest
+#    container_name: spring-boot-app
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - microservices-net
+#    environment:
+#      SPRING_PROFILES_ACTIVE: docker
+
+volumes:
+  grafana-data:
+
+networks:
+  microservices-net:
+    driver: bridge

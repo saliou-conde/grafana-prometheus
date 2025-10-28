@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: grafana-prometheus
+  config:
+    bloodpressure-url: http://localhost:9999/api/v1/patients
+
+
+server:
+  port: 9900
+
+
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus
