@@ -12,6 +12,7 @@ import java.util.List;
         url = "${spring.config.bloodpressure-url}"
 )
 public interface PatientReaderClient {
+
     @GetMapping
     List<PatientResponseDto> getPatients();
 

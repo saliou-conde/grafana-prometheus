@@ -22,6 +22,7 @@ public class PatientReaderService {
         log.info("Fetched {} patients", patients.size());
         return patients;
     }
+
     @GetMapping("/{id}")
     public PatientResponseDto getPatient(@PathVariable("id") String id) {
         log.info("Fetching patient with id: {}", id);
@@ -29,6 +30,5 @@ public class PatientReaderService {
         log.info("Fetched patient: {}", patient);
         return patient;
     }
-
 
 }
